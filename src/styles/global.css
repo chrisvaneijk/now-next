@@ -2,9 +2,9 @@
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
-  --bg:        #F8F4EF;
-  --bg-2:      #F1EAE1;
-  --bg-3:      #E8DDD1;
+  --bg:        #F0E8DC;
+  --bg-2:      #E8DDD0;
+  --bg-3:      #DDD0C0;
   --text:      #1C1814;
   --text-dim:  rgba(28,24,20,0.55);
   --text-mute: rgba(28,24,20,0.32);
