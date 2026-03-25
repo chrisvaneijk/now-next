@@ -1,54 +1,57 @@
 ---
+import { translations, type Lang } from '../i18n/translations';
+interface Props { lang?: Lang; }
+const { lang = 'nl' } = Astro.props;
+const a = translations[lang].about;
+
+const creds = [
+  { badge: 'SPC4', name: 'Certified SAFe® Program Consultant', org: 'Scaled Agile' },
+  { badge: 'PSM I', name: 'Professional Scrum Master', org: 'Scrum.org' },
+  { badge: 'AC', name: 'Agile Coaching', org: 'ICAgile' },
+  { badge: 'PO', name: 'Certified Product Owner', org: 'Agile Scrum Group' },
+];
+const statsNums = ['20', '3×', 'NL', '∅'];
 ---
 
-<section id="about" aria-label="About">
+<section id="about" aria-label={lang === 'nl' ? 'Over mij' : 'About'}>
   <div class="s-header rv" style="margin-bottom:0;padding-bottom:0;border-bottom:none;">
-    <p class="s-label">03 — About</p>
+    <p class="s-label">{a.label}</p>
   </div>
 
   <div class="about-grid">
     <div class="about-left">
       <h2 class="about-h2 rv">
-        One consultant.<br><em>Full-stack</em> capability.
+        {a.h2First}<br><em>{a.h2Second}</em>{a.h2Rest}
       </h2>
-      <p class="about-p rv">
-        I'm Chris — founder of now→next, operating from Voorburg, NL.
-        I work with organisations that need senior expertise delivered
-        without the overhead of a consultancy or the friction of a large team.
-      </p>
-      <p class="about-p rv">
-        My background spans technology leadership, enterprise agile, and
-        hands-on software delivery. I've led programs at scale and shipped
-        products from scratch — and I know the difference between
-        what sounds good in a workshop and what works in production.
-      </p>
-      <p class="about-p rv">
-        My current edge is AI-powered development. I've been using
-        AI coding tools since they existed. That means your project moves
-        at a velocity most teams can't match — with senior engineering
-        judgment guiding every decision.
-      </p>
+      <p class="about-p rv">{a.p1}</p>
+      <p class="about-p rv">{a.p2}</p>
+      <p class="about-p rv">{a.p3}</p>
+
+      <ul class="creds rv" aria-label="Certifications">
+        {creds.map(c => (
+          <li class="cred">
+            <span class="cred-badge">{c.badge}</span>
+            <span class="cred-name">{c.name}</span>
+            <span class="cred-org">{c.org}</span>
+          </li>
+        ))}
+      </ul>
     </div>
 
     <div class="about-right rv rv-d1">
       <div class="stats">
-        <div class="stat">
-          <div class="stat-n"><span class="hi">15</span>+</div>
-          <div class="stat-lbl">Years in tech &amp; transformation</div>
-        </div>
-        <div class="stat">
-          <div class="stat-n"><span class="hi">3×</span></div>
-          <div class="stat-lbl">Faster delivery with AI teams</div>
-        </div>
-        <div class="stat">
-          <div class="stat-n"><span class="hi">NL</span></div>
-          <div class="stat-lbl">Based in Voorburg, Netherlands</div>
-        </div>
-        <div class="stat">
-          <div class="stat-n"><span class="hi">∅</span></div>
-          <div class="stat-lbl">Days of methodology theater</div>
-        </div>
+        {statsNums.map((n, i) => (
+          <div class="stat">
+            <div class="stat-n"><span class="hi">{n}</span>{i === 0 ? '+' : ''}</div>
+            <div class="stat-lbl">{a.statsLabels[i]}</div>
+          </div>
+        ))}
       </div>
+
+      <blockquote class="testimonial rv rv-d2">
+        <p>{a.quote}</p>
+        <cite>{a.quoteBy}</cite>
+      </blockquote>
     </div>
   </div>
 </section>
@@ -128,6 +131,78 @@
     letter-spacing: .12em;
     text-transform: uppercase;
     color: var(--text-mute);
+  }
+
+  .creds {
+    list-style: none;
+    margin-top: 2.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    border: 1px solid var(--border);
+  }
+
+  .cred {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: .9rem 1.25rem;
+    border-bottom: 1px solid var(--border);
+    transition: background .2s;
+  }
+  .cred:last-child { border-bottom: none; }
+  .cred:hover { background: var(--bg-2); }
+
+  .cred-badge {
+    font-family: var(--f-mono);
+    font-size: .55rem;
+    font-weight: 700;
+    letter-spacing: .08em;
+    color: var(--accent);
+    border: 1px solid rgba(201,104,16,.35);
+    padding: .2rem .5rem;
+    min-width: 3rem;
+    text-align: center;
+    flex-shrink: 0;
+  }
+
+  .cred-name {
+    font-family: var(--f-body);
+    font-size: .82rem;
+    font-weight: 500;
+    color: var(--text);
+    flex: 1;
+  }
+
+  .cred-org {
+    font-family: var(--f-mono);
+    font-size: .55rem;
+    letter-spacing: .08em;
+    color: var(--text-mute);
+    white-space: nowrap;
+  }
+
+  .testimonial {
+    margin-top: 2rem;
+    padding: 1.5rem;
+    border-left: 2px solid var(--accent);
+    background: var(--bg-2);
+  }
+  .testimonial p {
+    font-family: var(--f-display);
+    font-style: italic;
+    font-size: .95rem;
+    color: var(--text-dim);
+    line-height: 1.65;
+    margin-bottom: .75rem;
+  }
+  .testimonial cite {
+    font-family: var(--f-mono);
+    font-size: .58rem;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--text-mute);
+    font-style: normal;
   }
 
   @media (max-width: 960px) {

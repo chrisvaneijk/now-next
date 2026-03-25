@@ -1,40 +1,25 @@
 ---
+import { translations, type Lang } from '../i18n/translations';
+interface Props { lang?: Lang; }
+const { lang = 'nl' } = Astro.props;
+const m = translations[lang].manifesto;
 ---
 
-<section id="manifesto" aria-label="Philosophy">
+<section id="manifesto" aria-label={lang === 'nl' ? 'Filosofie' : 'Philosophy'}>
   <div class="glow" aria-hidden="true"></div>
   <div class="body">
-    <p class="s-label rv" style="margin-bottom:2.25rem;">02 — Why now→next</p>
+    <p class="s-label rv" style="margin-bottom:2.25rem;">{m.label}</p>
     <blockquote class="manifesto-q rv">
-      The gap between <em>now</em> and <em>next</em> is where most companies
-      get stuck. Too slow to build. Too rigid to change. Too siloed to align.
-      I close that gap — <em>fast, smart, and without the ceremony.</em>
+      <Fragment set:html={m.quote} />
     </blockquote>
 
     <div class="pillars">
-      <div class="rv">
-        <p class="pillar-label">Speed</p>
-        <p class="pillar-text">
-          AI coding teams compress months into weeks. First working version
-          in days. Iterate on the spot. Deliver before the market moves.
-        </p>
-      </div>
-      <div class="rv rv-d1">
-        <p class="pillar-label">Clarity</p>
-        <p class="pillar-text">
-          No methodology theater. Clear goals, aligned teams,
-          tangible progress visible every sprint —
-          from C-suite to the people shipping.
-        </p>
-      </div>
-      <div class="rv rv-d2">
-        <p class="pillar-label">Transformation</p>
-        <p class="pillar-text">
-          Done right, it's metamorphosis. Done wrong,
-          you're just a faster caterpillar.
-          I've seen both — I do the former.
-        </p>
-      </div>
+      {m.pillars.map((p, i) => (
+        <div class={`rv${i > 0 ? ` rv-d${i}` : ''}`}>
+          <p class="pillar-label">{p.label}</p>
+          <p class="pillar-text">{p.text}</p>
+        </div>
+      ))}
     </div>
   </div>
 </section>
@@ -65,7 +50,7 @@
     line-height: 1.35;
     margin-bottom: 4rem;
   }
-  .manifesto-q em { font-style: normal; color: var(--accent); }
+  .manifesto-q :global(em) { font-style: normal; color: var(--accent); }
 
   .pillars {
     display: grid;

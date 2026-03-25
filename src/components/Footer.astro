@@ -1,14 +1,18 @@
 ---
+import { translations, type Lang } from '../i18n/translations';
+interface Props { lang?: Lang; }
+const { lang = 'nl' } = Astro.props;
+const f = translations[lang].footer;
 ---
 
 <footer>
   <span class="f-logo">now<span class="arr">→</span>next</span>
 
   <ul class="f-links" role="list">
-    <li><a href="#services">Services</a></li>
-    <li><a href="#about">About</a></li>
-    <li><a href="#process">Process</a></li>
-    <li><a href="#contact">Contact</a></li>
+    <li><a href="#services">{f.services}</a></li>
+    <li><a href="#about">{f.about}</a></li>
+    <li><a href="#process">{f.process}</a></li>
+    <li><a href="#contact">{f.contact}</a></li>
   </ul>
 
   <address class="f-address">

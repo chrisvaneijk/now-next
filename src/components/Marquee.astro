@@ -1,20 +1,13 @@
 ---
-const items = [
-  'AI coding teams',
-  'Digital transformation',
-  'SAFe 6.0',
-  'Rapid delivery',
-  'OKR alignment',
-  'Agile programs',
-  'Product strategy',
-  'Interim leadership',
-];
+import { translations, type Lang } from '../i18n/translations';
+interface Props { lang?: Lang; }
+const { lang = 'nl' } = Astro.props;
+const items = translations[lang].marquee;
 ---
 
 <div class="marquee-wrap" aria-hidden="true">
   <div class="marquee-track">
     {items.map(item => <span class="marquee-item">{item}</span>)}
-    {/* duplicate for seamless loop */}
     {items.map(item => <span class="marquee-item">{item}</span>)}
   </div>
 </div>

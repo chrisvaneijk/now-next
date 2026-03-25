@@ -1,49 +1,31 @@
 ---
-const services = [
-  {
-    num: '01',
-    name: 'AI-Powered App Development',
-    location: 'Netherlands',
-    desc: 'I build production-ready applications using AI coding teams. What used to take months now takes weeks. From idea to deployed product — with the quality and craft you\'d expect from a senior engineer.',
-    tags: ['AI coding', 'Full-stack', 'React / Next.js', 'Node / Python', 'Rapid delivery', 'Claude API'],
-    icon: `<svg class="svc-icon" viewBox="0 0 36 36" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="7" width="30" height="22" rx="2"/><path d="M12 15l-4 4 4 4M24 15l4 4-4 4M18 12l-3 12"/></svg>`,
-  },
-  {
-    num: '02',
-    name: 'Digital Transformation Programs',
-    location: 'Netherlands',
-    desc: 'Leading complex transformation programs across strategy, technology, and people. I bring the hands-on leadership and the ruthless clarity that turns digital ambition into real, sustained change.',
-    tags: ['Program lead', 'Change management', 'OKR', 'Stakeholder align', 'Strategy', 'Interim CTO/CPO'],
-    icon: `<svg class="svc-icon" viewBox="0 0 36 36" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="18" r="12"/><circle cx="18" cy="18" r="4"/><path d="M18 6v4M18 26v4M6 18h4M26 18h4"/><path d="M10 10l3 3M23 23l3 3M23 10l3-3M10 23l-3 3"/></svg>`,
-  },
-  {
-    num: '03',
-    name: 'SAFe Agile Transformation · Netherlands',
-    location: 'Netherlands',
-    desc: 'Guide organisations to genuine agility through SAFe — not the ceremony without the substance. Aligned teams, faster flow, better outcomes. I coach, facilitate, and lead until it sticks.',
-    tags: ['SAFe 6.0', 'PI Planning', 'Value streams', 'Agile coaching', 'Scrum / Kanban', 'Portfolio mgmt'],
-    icon: `<svg class="svc-icon" viewBox="0 0 36 36" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 4L4 14v18h9v-8h10v8h9V14L18 4z"/><rect x="14" y="24" width="8" height="8"/><path d="M10 20h4M22 20h4M18 14v6"/></svg>`,
-  },
+import { translations, type Lang } from '../i18n/translations';
+interface Props { lang?: Lang; }
+const { lang = 'nl' } = Astro.props;
+const s = translations[lang].services;
+
+const icons = [
+  `<svg class="svc-icon" viewBox="0 0 36 36" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="7" width="30" height="22" rx="2"/><path d="M12 15l-4 4 4 4M24 15l4 4-4 4M18 12l-3 12"/></svg>`,
+  `<svg class="svc-icon" viewBox="0 0 36 36" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="18" r="12"/><circle cx="18" cy="18" r="4"/><path d="M18 6v4M18 26v4M6 18h4M26 18h4"/><path d="M10 10l3 3M23 23l3 3M23 10l3-3M10 23l-3 3"/></svg>`,
+  `<svg class="svc-icon" viewBox="0 0 36 36" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 4L4 14v18h9v-8h10v8h9V14L18 4z"/><rect x="14" y="24" width="8" height="8"/><path d="M10 20h4M22 20h4M18 14v6"/></svg>`,
 ];
+const nums = ['01', '02', '03'];
 ---
 
 <section id="services" aria-label="Services">
   <div class="s-header rv">
     <div class="s-header-left">
-      <p class="s-label">01 — What I do</p>
-      <h2 class="s-title">Three ways I<br>drive impact</h2>
+      <p class="s-label">{s.label}</p>
+      <h2 class="s-title">{s.title[0]}<br>{s.title[1]}</h2>
     </div>
-    <p class="s-header-right">
-      Senior freelance expertise across build, transform, and scale.
-      Deployed fast — without the agency overhead.
-    </p>
+    <p class="s-header-right">{s.right}</p>
   </div>
 
   <div class="svcs-grid">
-    {services.map((svc, i) => (
+    {s.items.map((svc, i) => (
       <article class={`svc rv${i > 0 ? ` rv-d${i}` : ''}`}>
-        <div class="svc-num" aria-hidden="true">{svc.num}</div>
-        <Fragment set:html={svc.icon} />
+        <div class="svc-num" aria-hidden="true">{nums[i]}</div>
+        <Fragment set:html={icons[i]} />
         <h3 class="svc-name">{svc.name}</h3>
         <p class="svc-desc">{svc.desc}</p>
         <ul class="svc-tags" role="list" aria-label="Related skills">

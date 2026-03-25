@@ -1,36 +1,37 @@
 ---
+import { translations, type Lang } from '../i18n/translations';
+interface Props { lang?: Lang; }
+const { lang = 'nl' } = Astro.props;
+const h = translations[lang].hero;
+const wordsJson = JSON.stringify(h.words);
 ---
 
 <section class="hero" id="home" aria-label="Introduction">
   <div class="hero-grid" aria-hidden="true"></div>
   <div class="hero-glow"  aria-hidden="true"></div>
 
-  <p class="hero-eyebrow">Senior consultant · Voorburg, NL · Available now</p>
+  <p class="hero-eyebrow">{h.eyebrow}</p>
 
   <!-- h1 text is also the SEO-readable heading. Styled large via CSS. -->
   <h1 class="hero-h1">
     <span class="row"><span class="row-inner">FROM</span></span>
     <span class="row"><span class="row-inner dim-word">NOW <span class="arr-big" aria-hidden="true">→</span> <span id="morph-word">NEXT</span></span></span>
-    <span class="row"><span class="row-inner"><span class="accent-word" id="hero-sub-line">AI&nbsp;APPS</span></span></span>
+    <span class="row"><span class="row-inner"><span class="accent-word" id="hero-sub-line" set:html={h.words[0]}></span></span></span>
   </h1>
 
   <div class="hero-bottom">
-    <p class="hero-desc">
-      I help companies ship modern software faster, lead digital transformation
-      programs that stick, and build true agility through SAFe — all at the
-      speed that AI-assisted teams unlock.
-    </p>
+    <p class="hero-desc">{h.desc}</p>
     <div class="hero-actions">
-      <a href="#contact" class="btn-primary">Start a project →</a>
-      <a href="#services" class="btn-ghost">See services ↓</a>
+      <a href="#contact" class="btn-primary">{h.btnPrimary}</a>
+      <a href="#services" class="btn-ghost">{h.btnGhost}</a>
     </div>
   </div>
 
   <span class="hero-scroll" aria-hidden="true">scroll</span>
 </section>
 
-<script>
-  const words = ['AI&nbsp;APPS', 'DIGITAL<br>PROGRAMS', 'SAFe&nbsp;AGILE'];
+<script define:vars={{ wordsJson }}>
+  const words = JSON.parse(wordsJson);
   const el = document.getElementById('hero-sub-line');
   if (el) {
     let idx = 0;
@@ -112,6 +113,7 @@
   }
 
   .row { display: block; overflow: hidden; }
+  .row:nth-child(3) { min-height: calc(clamp(2.8rem, 7.5vw, 7rem) * .92 * 2); }
   .row-inner {
     display: block;
     opacity: 0;
@@ -123,7 +125,7 @@
 
   .accent-word { color: var(--accent); }
   .dim-word    { color: var(--text-mute); }
-  .arr-big     { color: var(--accent); display: inline-block; }
+  .arr-big     { color: var(--accent); display: inline-block; font-style: normal; vertical-align: 0.2em; }
 
   .hero-bottom {
     display: grid;

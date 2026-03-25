@@ -1,38 +1,20 @@
 ---
-const steps = [
-  {
-    num: '01 / Discover',
-    title: 'Understand the real problem',
-    desc: 'A sharp intake session to align on the goal, the constraints, and what success actually looks like — not what it sounds like.',
-  },
-  {
-    num: '02 / Design',
-    title: 'Define the path forward',
-    desc: 'A clear, scoped plan with honest resourcing and milestones focused on outcomes that matter.',
-  },
-  {
-    num: '03 / Deliver',
-    title: 'Ship, transform, accelerate',
-    desc: 'Hands-on execution. AI-assisted where it helps. Human-led where it counts. Visible progress every week.',
-  },
-  {
-    num: '04 / Embed',
-    title: 'Leave capability behind',
-    desc: 'The goal is always to make your team stronger — not dependent on a consultant indefinitely.',
-  },
-];
+import { translations, type Lang } from '../i18n/translations';
+interface Props { lang?: Lang; }
+const { lang = 'nl' } = Astro.props;
+const p = translations[lang].process;
 ---
 
-<section id="process" aria-label="How it works">
+<section id="process" aria-label={lang === 'nl' ? 'Hoe het werkt' : 'How it works'}>
   <div class="s-header rv">
     <div class="s-header-left">
-      <p class="s-label">04 — How it works</p>
-      <h2 class="s-title">From brief to<br>breakthrough</h2>
+      <p class="s-label">{p.label}</p>
+      <h2 class="s-title">{p.title[0]}<br>{p.title[1]}</h2>
     </div>
   </div>
 
   <ol class="steps" role="list">
-    {steps.map((step, i) => (
+    {p.steps.map((step, i) => (
       <li class={`step rv${i > 0 ? ` rv-d${i}` : ''}`}>
         <div class="step-n">{step.num}</div>
         <h3 class="step-title">{step.title}</h3>

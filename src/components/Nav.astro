@@ -1,14 +1,21 @@
 ---
+import { translations, type Lang } from '../i18n/translations';
+interface Props { lang?: Lang; }
+const { lang = 'nl' } = Astro.props;
+const n = translations[lang].nav;
 ---
 
 <nav>
-  <a href="#home" class="nav-logo">now<span class="arr">→</span>next</a>
+  <a href={lang === 'nl' ? '/#home' : '/en/#home'} class="nav-logo">now<span class="arr">→</span>next</a>
   <ul class="nav-links" role="list">
-    <li><a href="#services">Services</a></li>
-    <li><a href="#about">About</a></li>
-    <li><a href="#process">How it works</a></li>
+    <li><a href="#services">{n.services}</a></li>
+    <li><a href="#about">{n.about}</a></li>
+    <li><a href="#process">{n.process}</a></li>
   </ul>
-  <a href="#contact" class="nav-btn">Start a project →</a>
+  <div class="nav-right">
+    <a href={n.langSwitchHref} class="lang-switch">{n.langSwitch}</a>
+    <a href="#contact" class="nav-btn">{n.cta}</a>
+  </div>
 </nav>
 
 <style>
@@ -45,6 +52,25 @@
     transition: color .2s;
   }
   .nav-links a:hover { color: var(--text); }
+
+  .nav-right {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+  }
+
+  .lang-switch {
+    font-family: var(--f-mono);
+    font-size: .62rem;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    color: var(--text-mute);
+    text-decoration: none;
+    transition: color .2s, border-color .2s;
+    border: 1px solid var(--border);
+    padding: .4rem .7rem;
+  }
+  .lang-switch:hover { color: var(--text-dim); border-color: var(--border-2); }
 
   .nav-btn {
     font-family: var(--f-mono);

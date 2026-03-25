@@ -2,21 +2,29 @@
 interface Props {
   title: string;
   description: string;
+  lang?: 'nl' | 'en';
   canonical?: string;
 }
 
 const {
   title,
   description,
-  canonical = 'https://now-next.nl',
+  lang = 'nl',
+  canonical = lang === 'nl' ? 'https://now-next.nl/' : 'https://now-next.nl/en/',
 } = Astro.props;
 
 const ogImage = 'https://now-next.nl/og-image.png';
+const ogLocale = lang === 'nl' ? 'nl_NL' : 'en_GB';
 ---
 
 <title>{title}</title>
 <meta name="description" content={description} />
 <link rel="canonical" href={canonical} />
+
+<!-- hreflang -->
+<link rel="alternate" hreflang="nl" href="https://now-next.nl/" />
+<link rel="alternate" hreflang="en" href="https://now-next.nl/en/" />
+<link rel="alternate" hreflang="x-default" href="https://now-next.nl/" />
 
 <!-- Open Graph -->
 <meta property="og:type"        content="website" />
@@ -26,7 +34,7 @@ const ogImage = 'https://now-next.nl/og-image.png';
 <meta property="og:image"       content={ogImage} />
 <meta property="og:image:width"  content="1200" />
 <meta property="og:image:height" content="630" />
-<meta property="og:locale"      content="en_NL" />
+<meta property="og:locale"      content={ogLocale} />
 <meta property="og:site_name"   content="now→next" />
 
 <!-- Twitter Card -->
@@ -37,6 +45,6 @@ const ogImage = 'https://now-next.nl/og-image.png';
 
 <!-- Extra technical SEO -->
 <meta name="robots" content="index, follow" />
-<meta name="author" content="Chris — now→next" />
+<meta name="author" content="Chris van Eijk — now→next" />
 <meta name="geo.region" content="NL" />
 <meta name="geo.placename" content="Voorburg" />

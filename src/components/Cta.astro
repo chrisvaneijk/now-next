@@ -1,19 +1,20 @@
 ---
+import { translations, type Lang } from '../i18n/translations';
+interface Props { lang?: Lang; }
+const { lang = 'nl' } = Astro.props;
+const c = translations[lang].cta;
 ---
 
 <section id="contact" aria-label="Contact">
   <div class="glow" aria-hidden="true"></div>
   <div class="inner">
-    <p class="cta-label rv">Let's talk</p>
+    <p class="cta-label rv">{c.label}</p>
     <h2 class="cta-h2 rv">
-      Let's go from<br>now to next.
+      {c.h2[0]}<br>{c.h2[1]}
     </h2>
-    <p class="cta-sub rv">
-      One conversation is enough to know if we're a fit.
-      Tell me where you want to go — I'll tell you how fast we can get there.
-    </p>
+    <p class="cta-sub rv">{c.sub}</p>
     <div class="cta-row rv">
-      <a href="mailto:info@now-next.nl" class="btn-primary">Start the conversation →</a>
+      <a href="mailto:info@now-next.nl" class="btn-primary">{c.btn}</a>
       <a href="mailto:info@now-next.nl" class="cta-mail">
         <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true">
           <rect x="2" y="4" width="20" height="16" rx="2"/>
