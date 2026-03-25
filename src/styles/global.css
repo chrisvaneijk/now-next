@@ -13,7 +13,7 @@
   --border:    rgba(28,24,20,0.1);
   --border-2:  rgba(28,24,20,0.18);
 
-  --f-display: 'Syne', sans-serif;
+  --f-display: 'Instrument Serif', serif;
   --f-body:    'Outfit', sans-serif;
   --f-mono:    'Space Mono', monospace;
 }
@@ -82,7 +82,7 @@ body::after {
 }
 
 .s-title {
-  font-family: var(--f-display);
+  font-family: var(--f-body);
   font-weight: 800;
   font-size: clamp(1.75rem, 3vw, 2.6rem);
   letter-spacing: -.03em;
