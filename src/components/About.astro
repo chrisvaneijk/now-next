@@ -1,0 +1,136 @@
+---
+---
+
+<section id="about" aria-label="About">
+  <div class="s-header rv" style="margin-bottom:0;padding-bottom:0;border-bottom:none;">
+    <p class="s-label">03 — About</p>
+  </div>
+
+  <div class="about-grid">
+    <div class="about-left">
+      <h2 class="about-h2 rv">
+        One consultant.<br><em>Full-stack</em> capability.
+      </h2>
+      <p class="about-p rv">
+        I'm Chris — founder of now→next, operating from Voorburg, NL.
+        I work with organisations that need senior expertise delivered
+        without the overhead of a consultancy or the friction of a large team.
+      </p>
+      <p class="about-p rv">
+        My background spans technology leadership, enterprise agile, and
+        hands-on software delivery. I've led programs at scale and shipped
+        products from scratch — and I know the difference between
+        what sounds good in a workshop and what works in production.
+      </p>
+      <p class="about-p rv">
+        My current edge is AI-powered development. I've been using
+        AI coding tools since they existed. That means your project moves
+        at a velocity most teams can't match — with senior engineering
+        judgment guiding every decision.
+      </p>
+    </div>
+
+    <div class="about-right rv rv-d1">
+      <div class="stats">
+        <div class="stat">
+          <div class="stat-n"><span class="hi">15</span>+</div>
+          <div class="stat-lbl">Years in tech &amp; transformation</div>
+        </div>
+        <div class="stat">
+          <div class="stat-n"><span class="hi">3×</span></div>
+          <div class="stat-lbl">Faster delivery with AI teams</div>
+        </div>
+        <div class="stat">
+          <div class="stat-n"><span class="hi">NL</span></div>
+          <div class="stat-lbl">Based in Voorburg, Netherlands</div>
+        </div>
+        <div class="stat">
+          <div class="stat-n"><span class="hi">∅</span></div>
+          <div class="stat-lbl">Days of methodology theater</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  section {
+    padding: 8rem 3.5rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .about-grid {
+    display: grid;
+    grid-template-columns: 5fr 4fr;
+    gap: 6rem;
+    align-items: start;
+    margin-top: 4rem;
+  }
+
+  .about-h2 {
+    font-family: var(--f-display);
+    font-weight: 800;
+    font-size: clamp(1.8rem, 3.2vw, 2.6rem);
+    letter-spacing: -.03em;
+    line-height: 1.1;
+    margin-bottom: 2rem;
+  }
+  .about-h2 em { font-style: normal; color: var(--accent); }
+
+  .about-p {
+    font-size: .95rem;
+    color: var(--text-dim);
+    line-height: 1.78;
+    margin-bottom: 1.25rem;
+  }
+
+  .stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    background: var(--border);
+  }
+
+  .stat {
+    background: var(--bg);
+    padding: 2.25rem 2rem;
+    position: relative;
+    overflow: hidden;
+    transition: background .3s;
+  }
+  .stat:hover { background: var(--bg-3); }
+  .stat::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 2px;
+    background: var(--accent);
+    transform: scaleY(0);
+    transform-origin: bottom;
+    transition: transform .4s cubic-bezier(.22,1,.36,1);
+  }
+  .stat:hover::before { transform: scaleY(1); }
+
+  .stat-n {
+    font-family: var(--f-display);
+    font-weight: 800;
+    font-size: 2.6rem;
+    letter-spacing: -.04em;
+    line-height: 1;
+    margin-bottom: .5rem;
+  }
+  .stat-n .hi { color: var(--accent); }
+
+  .stat-lbl {
+    font-family: var(--f-mono);
+    font-size: .58rem;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--text-mute);
+  }
+
+  @media (max-width: 960px) {
+    section { padding: 5rem 1.75rem; }
+    .about-grid { grid-template-columns: 1fr; gap: 3rem; }
+  }
+</style>

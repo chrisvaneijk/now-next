@@ -1,0 +1,180 @@
+---
+---
+
+<section class="hero" id="home" aria-label="Introduction">
+  <div class="hero-grid" aria-hidden="true"></div>
+  <div class="hero-glow"  aria-hidden="true"></div>
+
+  <p class="hero-eyebrow">Senior consultant · Voorburg, NL · Available now</p>
+
+  <!-- h1 text is also the SEO-readable heading. Styled large via CSS. -->
+  <h1 class="hero-h1">
+    <span class="row"><span class="row-inner">FROM</span></span>
+    <span class="row"><span class="row-inner dim-word">NOW <span class="arr-big" aria-hidden="true">→</span> <span id="morph-word">NEXT</span></span></span>
+    <span class="row"><span class="row-inner"><span class="accent-word" id="hero-sub-line">AI&nbsp;APPS</span></span></span>
+  </h1>
+
+  <div class="hero-bottom">
+    <p class="hero-desc">
+      I help companies ship modern software faster, lead digital transformation
+      programs that stick, and build true agility through SAFe — all at the
+      speed that AI-assisted teams unlock.
+    </p>
+    <div class="hero-actions">
+      <a href="#contact" class="btn-primary">Start a project →</a>
+      <a href="#services" class="btn-ghost">See services ↓</a>
+    </div>
+  </div>
+
+  <span class="hero-scroll" aria-hidden="true">scroll</span>
+</section>
+
+<script>
+  const words = ['AI&nbsp;APPS', 'DIGITAL<br>PROGRAMS', 'SAFe&nbsp;AGILE'];
+  const el = document.getElementById('hero-sub-line');
+  if (el) {
+    let idx = 0;
+    setInterval(() => {
+      el.style.transition = 'opacity .3s ease, transform .3s ease';
+      el.style.opacity = '0';
+      el.style.transform = 'translateY(-12px)';
+      setTimeout(() => {
+        idx = (idx + 1) % words.length;
+        el.innerHTML = words[idx];
+        el.style.transition = 'none';
+        el.style.transform = 'translateY(12px)';
+        requestAnimationFrame(() => requestAnimationFrame(() => {
+          el.style.transition = 'opacity .35s ease, transform .35s ease';
+          el.style.opacity = '1';
+          el.style.transform = 'translateY(0)';
+        }));
+      }, 320);
+    }, 2800);
+  }
+</script>
+
+<style>
+  .hero {
+    min-height: 100svh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 0 3.5rem 5rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-grid {
+    position: absolute; inset: 0;
+    background-image: radial-gradient(rgba(237,232,223,.055) 1px, transparent 1px);
+    background-size: 44px 44px;
+    mask-image: radial-gradient(ellipse 90% 80% at 50% 40%, black 20%, transparent 80%);
+    pointer-events: none;
+  }
+
+  .hero-glow {
+    position: absolute; inset: 0; pointer-events: none;
+    background:
+      radial-gradient(ellipse 55% 45% at 72% 42%, rgba(194,255,71,.055) 0%, transparent 65%),
+      radial-gradient(ellipse 30% 30% at 18% 65%, rgba(255,85,51,.04) 0%, transparent 60%);
+  }
+
+  .hero-eyebrow {
+    font-family: var(--f-mono);
+    font-size: .62rem;
+    letter-spacing: .22em;
+    text-transform: uppercase;
+    color: var(--accent);
+    display: flex;
+    align-items: center;
+    gap: .85rem;
+    margin-bottom: 3rem;
+    position: relative;
+    opacity: 0;
+    transform: translateY(16px);
+    animation: fadeUp .7s .15s forwards;
+  }
+  .hero-eyebrow::before {
+    content: ''; display: block;
+    width: 1.75rem; height: 1px;
+    background: var(--accent);
+  }
+
+  .hero-h1 {
+    font-family: var(--f-display);
+    font-weight: 800;
+    font-size: clamp(3.8rem, 11.5vw, 11rem);
+    line-height: .9;
+    letter-spacing: -.04em;
+    position: relative;
+    margin-bottom: 2.5rem;
+  }
+
+  .row { display: block; overflow: hidden; }
+  .row-inner {
+    display: block;
+    opacity: 0;
+    transform: translateY(100%);
+  }
+  .row:nth-child(1) .row-inner { animation: slideUp .8s .35s cubic-bezier(.22,1,.36,1) forwards; }
+  .row:nth-child(2) .row-inner { animation: slideUp .8s .50s cubic-bezier(.22,1,.36,1) forwards; }
+  .row:nth-child(3) .row-inner { animation: slideUp .8s .65s cubic-bezier(.22,1,.36,1) forwards; }
+
+  .accent-word { color: var(--accent); }
+  .dim-word    { color: var(--text-mute); }
+  .arr-big     { color: var(--accent); display: inline-block; }
+
+  .hero-bottom {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    align-items: flex-end;
+    position: relative;
+    opacity: 0;
+    transform: translateY(16px);
+    animation: fadeUp .7s .95s forwards;
+  }
+
+  .hero-desc {
+    font-size: 1.05rem;
+    color: var(--text-dim);
+    line-height: 1.7;
+    max-width: 40ch;
+  }
+
+  .hero-actions {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 2rem;
+  }
+
+  .hero-scroll {
+    position: absolute;
+    right: 3.5rem; bottom: 5rem;
+    font-family: var(--f-mono);
+    font-size: .58rem;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+    color: var(--text-mute);
+    writing-mode: vertical-rl;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    opacity: 0;
+    animation: fadeIn 1s 1.4s forwards;
+  }
+  .hero-scroll::after {
+    content: '';
+    width: 1px; height: 52px;
+    background: linear-gradient(to bottom, var(--text-mute), transparent);
+    animation: pulse 2.2s 2s infinite;
+  }
+
+  @media (max-width: 960px) {
+    .hero { padding: 0 1.75rem 4.5rem; }
+    .hero-bottom { grid-template-columns: 1fr; gap: 2rem; }
+    .hero-actions { justify-content: flex-start; }
+    .hero-scroll { display: none; }
+  }
+</style>

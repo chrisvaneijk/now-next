@@ -1,0 +1,69 @@
+---
+// JSON-LD structured data: Person + LocalBusiness + 3× Service
+const schema = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Person",
+      "@id": "https://now-next.nl/#chris",
+      "name": "Chris",
+      "jobTitle": "Senior Tech Consultant & Freelancer",
+      "description": "Freelance consultant specialising in AI-powered app development, digital transformation programs, and SAFe agile transformations.",
+      "url": "https://now-next.nl",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Parkweg 208",
+        "addressLocality": "Voorburg",
+        "postalCode": "2271 BE",
+        "addressCountry": "NL"
+      }
+    },
+    {
+      "@type": "LocalBusiness",
+      "@id": "https://now-next.nl/#business",
+      "name": "now→next",
+      "url": "https://now-next.nl",
+      "email": "info@now-next.nl",
+      "vatID": "NL002193570B62",
+      "legalName": "now-next",
+      "foundingDate": "2019",
+      "founder": { "@id": "https://now-next.nl/#chris" },
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Parkweg 208",
+        "addressLocality": "Voorburg",
+        "postalCode": "2271 BE",
+        "addressCountry": "NL"
+      },
+      "areaServed": ["NL", "BE", "DE"],
+      "description": "Senior freelance tech consultancy offering AI app development, digital transformation leadership, and SAFe agile transformation programs."
+    },
+    {
+      "@type": "Service",
+      "name": "AI-Powered App Development",
+      "provider": { "@id": "https://now-next.nl/#business" },
+      "areaServed": "NL",
+      "description": "Build production-ready applications at speed using AI coding teams. From concept to deployed product in weeks, not months.",
+      "serviceType": "Software Development"
+    },
+    {
+      "@type": "Service",
+      "name": "Digital Transformation Programs",
+      "provider": { "@id": "https://now-next.nl/#business" },
+      "areaServed": "NL",
+      "description": "End-to-end digital transformation program leadership — strategy, execution, and change management that delivers real outcomes.",
+      "serviceType": "Management Consulting"
+    },
+    {
+      "@type": "Service",
+      "name": "SAFe Agile Transformation",
+      "provider": { "@id": "https://now-next.nl/#business" },
+      "areaServed": "NL",
+      "description": "Guide organisations through SAFe 6.0 adoption — aligned teams, faster flow, and genuine agility that sticks.",
+      "serviceType": "Agile Consulting"
+    }
+  ]
+};
+---
+
+<script type="application/ld+json" set:html={JSON.stringify(schema)} />

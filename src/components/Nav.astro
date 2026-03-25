@@ -1,0 +1,68 @@
+---
+---
+
+<nav>
+  <a href="#home" class="nav-logo">now<span class="arr">→</span>next</a>
+  <ul class="nav-links" role="list">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#process">How it works</a></li>
+  </ul>
+  <a href="#contact" class="nav-btn">Start a project →</a>
+</nav>
+
+<style>
+  nav {
+    position: fixed; top: 0; left: 0; right: 0;
+    z-index: 500;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.75rem 3.5rem;
+    background: linear-gradient(to bottom, rgba(7,8,13,.96) 60%, transparent);
+  }
+
+  .nav-logo {
+    font-family: var(--f-display);
+    font-weight: 800;
+    font-size: 1.05rem;
+    letter-spacing: -.02em;
+    color: var(--text);
+    text-decoration: none;
+  }
+  .nav-logo .arr { color: var(--accent); }
+
+  .nav-links {
+    display: flex; gap: 2.75rem; list-style: none;
+  }
+  .nav-links a {
+    font-family: var(--f-mono);
+    font-size: .62rem;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    text-decoration: none;
+    transition: color .2s;
+  }
+  .nav-links a:hover { color: var(--text); }
+
+  .nav-btn {
+    font-family: var(--f-mono);
+    font-size: .62rem;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--bg);
+    background: var(--accent);
+    padding: .65rem 1.5rem;
+    text-decoration: none;
+    font-weight: 700;
+    transition: background .2s, transform .2s;
+    white-space: nowrap;
+  }
+  .nav-btn:hover { background: #d4ff60; transform: translateY(-1px); }
+
+  @media (max-width: 960px) {
+    nav { padding: 1.5rem 1.75rem; }
+    .nav-links { display: none; }
+  }
+</style>

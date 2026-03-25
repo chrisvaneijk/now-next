@@ -1,0 +1,63 @@
+---
+---
+
+<footer>
+  <span class="f-logo">now<span class="arr">→</span>next</span>
+
+  <ul class="f-links" role="list">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#process">Process</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+
+  <address class="f-address">
+    <span class="f-meta">Parkweg 208, 2271 BE Voorburg · KvK 72975652 · BTW NL002193570B62</span>
+  </address>
+</footer>
+
+<style>
+  footer {
+    padding: 2.25rem 3.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1rem;
+    border-top: 1px solid var(--border);
+  }
+
+  .f-logo {
+    font-family: var(--f-display);
+    font-weight: 800;
+    font-size: .95rem;
+    letter-spacing: -.02em;
+    color: var(--text);
+  }
+  .f-logo .arr { color: var(--accent); }
+
+  .f-links { display: flex; gap: 2rem; list-style: none; }
+  .f-links a {
+    font-family: var(--f-mono);
+    font-size: .58rem;
+    letter-spacing: .15em;
+    text-transform: uppercase;
+    color: var(--text-mute);
+    text-decoration: none;
+    transition: color .2s;
+  }
+  .f-links a:hover { color: var(--text-dim); }
+
+  .f-address { font-style: normal; }
+  .f-meta {
+    font-family: var(--f-mono);
+    font-size: .58rem;
+    letter-spacing: .06em;
+    color: var(--text-mute);
+  }
+
+  @media (max-width: 960px) {
+    footer { padding: 2rem 1.75rem; flex-direction: column; text-align: center; }
+    .f-links { justify-content: center; }
+  }
+</style>

@@ -1,0 +1,93 @@
+---
+const steps = [
+  {
+    num: '01 / Discover',
+    title: 'Understand the real problem',
+    desc: 'A sharp intake session to align on the goal, the constraints, and what success actually looks like — not what it sounds like.',
+  },
+  {
+    num: '02 / Design',
+    title: 'Define the path forward',
+    desc: 'A clear, scoped plan with honest resourcing and milestones focused on outcomes that matter.',
+  },
+  {
+    num: '03 / Deliver',
+    title: 'Ship, transform, accelerate',
+    desc: 'Hands-on execution. AI-assisted where it helps. Human-led where it counts. Visible progress every week.',
+  },
+  {
+    num: '04 / Embed',
+    title: 'Leave capability behind',
+    desc: 'The goal is always to make your team stronger — not dependent on a consultant indefinitely.',
+  },
+];
+---
+
+<section id="process" aria-label="How it works">
+  <div class="s-header rv">
+    <div class="s-header-left">
+      <p class="s-label">04 — How it works</p>
+      <h2 class="s-title">From brief to<br>breakthrough</h2>
+    </div>
+  </div>
+
+  <ol class="steps" role="list">
+    {steps.map((step, i) => (
+      <li class={`step rv${i > 0 ? ` rv-d${i}` : ''}`}>
+        <div class="step-n">{step.num}</div>
+        <h3 class="step-title">{step.title}</h3>
+        <p class="step-desc">{step.desc}</p>
+      </li>
+    ))}
+  </ol>
+</section>
+
+<style>
+  section {
+    padding: 8rem 3.5rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .steps {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    list-style: none;
+  }
+
+  .step {
+    padding: 2.25rem 2.5rem;
+    border-left: 1px solid var(--border);
+  }
+  .step:first-child { border-left: none; padding-left: 0; }
+
+  .step-n {
+    font-family: var(--f-mono);
+    font-size: .58rem;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 1.35rem;
+  }
+
+  .step-title {
+    font-family: var(--f-display);
+    font-weight: 700;
+    font-size: 1.05rem;
+    letter-spacing: -.02em;
+    margin-bottom: .75rem;
+  }
+
+  .step-desc {
+    font-size: .85rem;
+    color: var(--text-dim);
+    line-height: 1.7;
+  }
+
+  @media (max-width: 960px) {
+    section { padding: 5rem 1.75rem; }
+    .steps { grid-template-columns: 1fr 1fr; }
+    .step:nth-child(odd)  { border-left: none; padding-left: 0; }
+    .step:nth-child(3),
+    .step:nth-child(4)    { padding-top: 2.25rem; border-top: 1px solid var(--border); }
+  }
+</style>

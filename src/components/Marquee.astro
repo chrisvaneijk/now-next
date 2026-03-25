@@ -1,0 +1,48 @@
+---
+const items = [
+  'AI coding teams',
+  'Digital transformation',
+  'SAFe 6.0',
+  'Rapid delivery',
+  'OKR alignment',
+  'Agile programs',
+  'Product strategy',
+  'Interim leadership',
+];
+---
+
+<div class="marquee-wrap" aria-hidden="true">
+  <div class="marquee-track">
+    {items.map(item => <span class="marquee-item">{item}</span>)}
+    {/* duplicate for seamless loop */}
+    {items.map(item => <span class="marquee-item">{item}</span>)}
+  </div>
+</div>
+
+<style>
+  .marquee-wrap {
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    padding: 1.1rem 0;
+    overflow: hidden;
+    background: var(--bg-2);
+  }
+
+  .marquee-track {
+    display: flex;
+    animation: marquee 28s linear infinite;
+    width: max-content;
+  }
+
+  .marquee-item {
+    font-family: var(--f-mono);
+    font-size: .6rem;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+    color: var(--text-mute);
+    padding: 0 2.5rem;
+    display: flex; align-items: center; gap: 2.5rem;
+    white-space: nowrap;
+  }
+  .marquee-item::after { content: '→'; color: var(--accent); }
+</style>

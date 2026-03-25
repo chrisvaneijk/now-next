@@ -1,0 +1,97 @@
+---
+import SEO from '../components/SEO.astro';
+import SchemaOrg from '../components/SchemaOrg.astro';
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  description: string;
+}
+
+const { title, description } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Outfit:wght@300;400;500;600&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap"
+      rel="stylesheet"
+    />
+
+    <SEO title={title} description={description} />
+    <SchemaOrg />
+  </head>
+  <body>
+    <!-- Custom cursor (desktop only, handled by CSS @media pointer:fine) -->
+    <div id="cur-dot" aria-hidden="true"></div>
+    <div id="cur-ring" aria-hidden="true"></div>
+
+    <slot />
+
+    <script>
+      // ── Custom cursor ──────────────────────────────────────
+      const dot  = document.getElementById('cur-dot');
+      const ring = document.getElementById('cur-ring');
+
+      if (dot && ring && window.matchMedia('(pointer: fine)').matches) {
+        let mx = -100, my = -100, rx = -100, ry = -100;
+
+        document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
+
+        (function tick() {
+          rx += (mx - rx) * 0.11;
+          ry += (my - ry) * 0.11;
+          dot.style.left  = mx + 'px';
+          dot.style.top   = my + 'px';
+          ring.style.left = rx + 'px';
+          ring.style.top  = ry + 'px';
+          requestAnimationFrame(tick);
+        })();
+
+        document.querySelectorAll('a, button').forEach(el => {
+          el.addEventListener('mouseenter', () => {
+            dot.style.width  = dot.style.height  = '10px';
+            ring.style.width = ring.style.height = '48px';
+            ring.style.borderColor = 'rgba(194,255,71,.6)';
+          });
+          el.addEventListener('mouseleave', () => {
+            dot.style.width  = dot.style.height  = '6px';
+            ring.style.width = ring.style.height = '28px';
+            ring.style.borderColor = 'rgba(194,255,71,.35)';
+          });
+        });
+      }
+
+      // ── Scroll reveal ──────────────────────────────────────
+      const obs = new IntersectionObserver(entries => {
+        entries.forEach(e => {
+          if (e.isIntersecting) {
+            e.target.classList.add('in');
+            obs.unobserve(e.target);
+          }
+        });
+      }, { threshold: 0.1 });
+
+      document.querySelectorAll('.rv').forEach(el => obs.observe(el));
+
+      // ── Smooth scroll ──────────────────────────────────────
+      document.querySelectorAll('a[href^="#"]').forEach(a => {
+        a.addEventListener('click', e => {
+          const id = a.getAttribute('href');
+          if (!id || id === '#') return;
+          e.preventDefault();
+          const t = document.querySelector(id);
+          if (t) t.scrollIntoView({ behavior: 'smooth' });
+        });
+      });
+    </script>
+  </body>
+</html>
